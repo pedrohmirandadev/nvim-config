@@ -23,3 +23,17 @@ vim.o.expandtab = true
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
+
+vim.g.codeium_disable_bindings = 1
+
+vim.keymap.set("i", "<C-Enter>", function()
+
+return vim.fn["codeium#Accept"]()
+
+end, { expr = true, silent = true, desc = "Codeium: Accept" })
+
+vim.keymap.set("n", "<leader>k", "<cmd>LazyDocker<CR>", { desc = "Toggle LazyDocker", noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Toggle Lazy", noremap = true, silent = true })
+
+

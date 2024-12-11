@@ -8,9 +8,10 @@ return {
   "AstroNvim/astroui",
   ---@type AstroUIOpts
   opts = {
+    colorscheme = "tokyonight-moon",
     -- change colorscheme
-    colorscheme = "catppuccin-macchiato",
-    -- colorscheme = "kanagawa-wave",
+    -- colorscheme = "cyberdream",
+    -- colorscheme = "kanagawa",
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
     highlights = {
       init = { -- this table overrides highlights in all themes
@@ -36,3 +37,7 @@ return {
     },
   },
 }
+    -- colorscheme = "gruvbox-material",
+    -- colorscheme = "catppuccin-macchiato",
+    -- colorscheme = "kanagawa-wave",
+
