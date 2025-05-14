@@ -2,7 +2,39 @@
 -- things like custom filetypes. This just pure lua so anything that doesn't
 -- fit in the normal config locations above can go here
 local dap = require "dap"
-require("nvim-dap-virtual-text").setup {}
+require("nvim-dap-virtual-text").setup {
+  enabled = true,
+  enabled_commands = true,
+  highlight_changed_variables = true,
+  all_frames = false,
+  commented = false,
+}
+
+require("dap-vscode-js").setup({
+  debugger_path =  os.getenv "HOME" .. "/.config/nvim/adapters/vscode-js-debug",
+  adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+})
+
+for _, language in ipairs({ "typescript", "javascript" }) do
+  dap.configurations[language] = {
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch file",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+      sourceMaps = true,
+      skipFiles = { "<node_internals>/**", "node_modules/**" },
+    },
+    {
+      type = "pwa-node",
+      request = "attach",
+      name = "Attach",
+      processId = require'dap.utils'.pick_process,
+      cwd = "${workspaceFolder}",
+      skipFiles = { "<node_internals>/**", "node_modules/**" },
+    }}
+end
 
 -- Do not forget to run 'npm install' and 'npm run build' inside the adapters/vscode-php-debug folder
 dap.adapters.php = {
